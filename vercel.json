@@ -1,4 +1,4 @@
-{
+{   "version": 2,
     "builds": [
         {
             "src":"./src/app.js",
@@ -7,7 +7,7 @@
     ],
    "routes":[
     {
-        "src":"/invitation/home(.*)",
+        "src":"/(.*)",
         "dest":"/"
     }
    ]
