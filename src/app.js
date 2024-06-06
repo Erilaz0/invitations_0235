@@ -1,12 +1,16 @@
 const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
-const invitation = require("./src/routes/invitation.router")
+
+const invitation = require("./routes/invitation.router")
+
 const cors = require('cors');
 const cluster = require('cluster');
 const os = require('os');
-const { send, sendAdmin } = require("./src/mailing/send");
+const { send, sendAdmin } = require("./mailing/send");
 const numCPUs = os.cpus().length;
+const handleBars = require("express-handlebars")
+
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -42,13 +46,15 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.engine("handlebars", handleBars.engine())
+app.set("views", __dirname + "/views");
+app.set("view engine","handlebars")
 
 
 app.use("/invitation" , invitation ) 
 app.use("/",( req , res )=>{
 
-  res.status( 200 ).json( { message : "200 OK" } )
+  res.status( 200 ).render(`welcome`)
 })
 
 

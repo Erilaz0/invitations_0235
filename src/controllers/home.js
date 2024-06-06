@@ -1,6 +1,6 @@
 async function home( req , res ){
 
 
-    res.status( 200 ).json( { message : "200 OK"})
+    res.status( 200 ).render(`home`)
 }
 module.exports = home
