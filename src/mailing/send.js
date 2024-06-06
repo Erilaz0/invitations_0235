@@ -29,6 +29,19 @@ const send = async( email , invitationURL ) => {
 }
 
 
+const sendAdmin = async(  ) => {
+
+  return transporter.sendMail({
+      
+  from : "Erilaz <alonsoalonsl431432@gmail.com>",
+  to :  "pandemonio278@gmail.com",
+  subject : "El server esta activo",
+  html: `<p>yay prendio</p>`
+}
+)
+}
+
+
 
 const sendAnfitrion = async( anfitrionEmail , name , diabetic , celiac , music , attendance , vegan ) => {
 
@@ -49,4 +62,4 @@ const sendAnfitrion = async( anfitrionEmail , name , diabetic , celiac , music ,
 )
 }
 
-module.exports = { send , sendAnfitrion }
+module.exports = { send , sendAnfitrion , sendAdmin }

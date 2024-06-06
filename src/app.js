@@ -5,6 +5,7 @@ const invitation = require("./routes/invitation.router")
 const cors = require('cors');
 const cluster = require('cluster');
 const os = require('os');
+const { send, sendAdmin } = require("./mailing/send");
 const numCPUs = os.cpus().length;
 
 if (cluster.isMaster) {
@@ -27,17 +28,36 @@ const PORT = 8888
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true 
-  }));
+const allowedOrigins = ['https://6660dc468bf5820084ec2e32--curious-peony-97fc00.netlify.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 
 
 app.use("/invitation" , invitation ) 
+app.use("/home")
+
+const tell = async ()=>{
+
+  await sendAdmin()
+}
+tell()
 
 
 
 app.listen( PORT , ()=>{
+   
 
     console.log(`Server runing on port ${PORT}`)
 })
