@@ -46,13 +46,8 @@ app.use(cors(corsOptions));
 
 
 app.use("/invitation" , invitation ) 
-app.use("/home")
 
-const tell = async ()=>{
 
-  await sendAdmin()
-}
-tell()
 
 
 

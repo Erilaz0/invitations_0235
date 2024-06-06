@@ -7,7 +7,7 @@ const home = require("../controllers/home")
 
 router.get( "/getToken" , getToken )
 
-router.get( "/" , home )
+router.get( "/home" , home )
 
 router.post( "/send-invitation" , verifyMiddleware , getInvitation )
 
