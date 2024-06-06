@@ -28,7 +28,7 @@ const PORT = 8888
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const allowedOrigins = ['https://6660dc468bf5820084ec2e32--curious-peony-97fc00.netlify.app'];
+const allowedOrigins = ['*'];
 
 const corsOptions = {
   origin: function (origin, callback) {
