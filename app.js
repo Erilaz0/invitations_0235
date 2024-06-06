@@ -1,11 +1,11 @@
 const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
-const invitation = require("./routes/invitation.router")
+const invitation = require("./src/routes/invitation.router")
 const cors = require('cors');
 const cluster = require('cluster');
 const os = require('os');
-const { send, sendAdmin } = require("./mailing/send");
+const { send, sendAdmin } = require("./src/mailing/send");
 const numCPUs = os.cpus().length;
 
 if (cluster.isMaster) {
