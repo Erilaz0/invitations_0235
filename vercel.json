@@ -7,7 +7,7 @@
     ],
    "routes":[
     {
-        "src":"/invitation/home",
+        "src":"/invitation/home(.*)",
         "dest":"/"
     }
    ]
