@@ -10,10 +10,11 @@ const bcrypt = require("bcrypt")
     
         const token = req.cookies["4eb12nsb433nsh1ma7SHD7nsia8"]
         console.log("iniciando token verify")
+        console.log(token)
         jwt.verify( token , key01 , async ( error , credentials )=>{
     
             if( credentials ){
-        console.log("credenciales machean")
+            console.log("credenciales machean")
              
                 const secret = credentials.secret 
                 const final_verification = await bcrypt.compare( key03 , secret )
