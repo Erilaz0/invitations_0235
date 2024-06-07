@@ -25,7 +25,8 @@ async function getInvitation( req , res ){
     const verify = email && invitationURL && name && diabetic && celiac && music && attendance && vegan && anfitrionEmail && first_verify 
     const secondVerify = diabeticVerify && musicVerify && celiacVerify && veganVerify && anfitrionEmailVerify && attendanceVerify
    try{
-
+    console.log( verify)
+    console.log( secondVerify)
     if( verify && secondVerify ){
 
         await sendAnfitrion( anfitrionEmail , name , diabetic , celiac , music , attendance , vegan )
