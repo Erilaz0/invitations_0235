@@ -8,7 +8,11 @@ const getToken = async ( req , res )=>{
 
             const hash = await bcrypt.hash( "F3sT8JN08Nb8vZX3cQr6nk,kl9jnjj7YBH88" , 12 )
             const key00 = generaJWT( hash )
-            res.cookie( "4eb12nsb433nsh1ma7SHD7nsia8" , key00 , { httpOnly : false } )
+            res.cookie( "4eb12nsb433nsh1ma7SHD7nsia8" , key00 , {
+                 httpOnly : false ,
+                 secure: true, // Asegúrate de que esta opción sea true en producción si usas HTTPS
+                 sameSite: 'None'    
+            } )
             res.status( 200 ).json( {  message : "success"} )
     
         
