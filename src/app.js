@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
+const admin = require('firebase-admin');
 
 const invitation = require("./routes/invitation.router")
 
@@ -27,6 +28,8 @@ if (cluster.isMaster) {
   });
 } else {
 
+admin.initializeApp();
+const db = admin.firestore();
 
 const PORT = 8888
 app.use(express.json());
