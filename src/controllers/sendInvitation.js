@@ -46,11 +46,11 @@ async function getInvitation( req , res ){
         
        }
        else{
-        res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo" } )
+        res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo 2" } )
        }
    }
    catch(error){
-        res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo" } )
+        res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo 1" } )
    }
 
  
