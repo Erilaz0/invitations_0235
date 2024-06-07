@@ -31,16 +31,19 @@ async function getInvitation( req , res ){
 
         await sendAnfitrion( anfitrionEmail , name , diabetic , celiac , music , attendance , vegan )
         .then( async ()=>{
-            
+            console.log("enviado al user")
             await send( email , invitationURL )
             .then(( response )=>{ 
+                console.log("enviado a todos")
                 res.status(200).json( { message : "success, all invitations have been sent" } )
             })
             .catch(( error )=>{
                  res.status(400).json( { error : "cannot send invitation" } )
+                 console.log(error)
                 })
         })
         .catch((error)=>{
+            console.log(error)
            res.status(400).json( { error : error } )
         })
        
