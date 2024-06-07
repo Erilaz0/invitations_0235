@@ -38,7 +38,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin:"https://6663493800616e07523c54ca--peppy-cuchufli-2dc86e.netlify.app/",
+  origin:"https://6663493800616e07523c54ca--peppy-cuchufli-2dc86e.netlify.app",
   credentials: true
 }));
 app.engine("handlebars", handleBars.engine())
