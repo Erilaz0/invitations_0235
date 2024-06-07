@@ -9,10 +9,11 @@ const bcrypt = require("bcrypt")
     const jwtVerify = ( req , res , next )=>{
     
         const token = req.cookies["4eb12nsb433nsh1ma7SHD7nsia8"]
-        
+        console.log("iniciando token verify")
         jwt.verify( token , key01 , async ( error , credentials )=>{
     
             if( credentials ){
+        console.log("credenciales machean")
              
                 const secret = credentials.secret 
                 const final_verification = await bcrypt.compare( key03 , secret )
@@ -20,11 +21,15 @@ const bcrypt = require("bcrypt")
                     next()
                 }
                 else{
+                console.log("credenciale 2 sno machean")
+
                     res.status( 400 ).json( { error : error } )
                 }
                
             }
             else if( error ){
+            console.log("credenciales no machean")
+   
                 res.status( 400 ).json( { error : error } )
             }
             else{

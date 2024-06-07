@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
-const admin = require('firebase-admin');
+
 
 const invitation = require("./routes/invitation.router")
 
@@ -28,27 +28,19 @@ if (cluster.isMaster) {
   });
 } else {
 
-admin.initializeApp();
-const db = admin.firestore();
+
 
 const PORT = 8888
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const allowedOrigins = ['*'];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors({
+  origin:"https://curious-peony-97fc00.netlify.app",
+  credentials: true
+}));
 app.engine("handlebars", handleBars.engine())
 app.set("views", __dirname + "/views");
 app.set("view engine","handlebars")
