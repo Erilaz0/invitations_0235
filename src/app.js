@@ -12,7 +12,7 @@ const cluster = require('cluster');
 const os = require('os');
 const numCPUs = os.cpus().length;
 const handleBars = require("express-handlebars")
-
+/*
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
 
@@ -27,7 +27,7 @@ if (cluster.isMaster) {
 } else {
   console.log("Not cluster.isMaster")
 }
-
+*/
 
 
 const PORT = process.env.PORT
