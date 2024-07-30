@@ -30,7 +30,7 @@ if (cluster.isMaster) {
 
 
 
-const PORT = process.env.port
+const PORT = process.env.PORT
 const origin = process.env.ORIGIN
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
