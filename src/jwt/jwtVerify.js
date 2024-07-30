@@ -1,32 +1,52 @@
 const jwt = require("jsonwebtoken")
-const generaJWT = require("../jwt/generaJwt")
-const key01 = process.env.key00 || "5233ed244dfASSmjsjn7ha..JSD8AJ9dn1sj10" //el secret q tiene q estar en el header pero codificado con jwt y con bcrypt
-const bcrypt = require("bcrypt")
+const key01 = process.env.key01 
+const keyAdmin = process.env.keyAdmin 
 
 
 
-const jwtVerify = ( req , res , next )=>{
 
-    const token = req.cookies["4eb12nsb433nsh1ma7SHD7nsia8"]
+const jwtVerify = async ( token )=>{
 
+    if( token ){
+            return new Promise((resolve, reject) => {
+                jwt.verify( token , key01 , ( error , credentials )=>{
+                  if( error ){
+                    reject( error )
+                  }
+                  else{
+                    resolve( credentials )
+                  }
+                })
+            })
+    }
+    else{
+      throw new Error("Invalid Cookie")
+    }
+    }
+
+
+
+const jwtAdminVerify = async ( token )=>{
+
+    if( token ){
+
+            return new Promise((resolve, reject) => {
+                jwt.verify( token , keyAdmin , ( error , credentials )=>{
+                  if( error ){
+                    reject( "Invalid Token" )
+                  }
+                  else{
+                    resolve( credentials )
+                  }
+                })
+            })
+    }
+    else{
+         throw new Error("Invalid Cookie")
+    }
+    }
+   
+   
     
-    jwt.verify( token , key01 , ( error , credentials )=>{
 
-        if( credentials ){
-            console.log( credentials )
-            console.log("yay")
-            return
-        }
-        else if( error ){
-            console.log( error )
-            return
-        }
-        else{
-            console.log("error")
-            return
-        }
-        next()
-
-    })
-}
-module.exports = jwtVerify
+module.exports = { jwtVerify , jwtAdminVerify }

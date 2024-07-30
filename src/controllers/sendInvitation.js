@@ -1,71 +1,64 @@
-const { send , sendAnfitrion } = require("../mailing/send")
+const { default : mongoose } = require("mongoose");
+const usersServices = require("../services/users.service");
 
 
 
-async function getInvitation( req , res ){
+async function addGuestInformation( req , res ){
 
     const body = req.body
     const email = body.email
-    const invitationURL = body.invitationURL 
     const name = body.name
-    const diabetic = body.diabetic
-    const celiac = body.celiac
     const music = body.music
     const attendance = body.attendance
-    const vegan = body.vegan 
-    const anfitrionEmail = body.anfitrionEmail
-    
-    const first_verify = typeof email === "string" && email.includes("@")&& typeof invitationURL === "string" &&  typeof name === "string"
-    const diabeticVerify = typeof diabetic === "string" && ( diabetic === "Sí" || diabetic === "No" ) 
-    const musicVerify =  typeof music === "string" 
-    const celiacVerify =  typeof celiac === "string" && ( celiac === "Sí" || celiac === "No" )
-    const veganVerify = typeof vegan === "string" && ( vegan === "Sí" || vegan === "No" )
-    const anfitrionEmailVerify = typeof anfitrionEmail === "string" 
-    const attendanceVerify = typeof attendance === "string" && ( attendance === "Sí" || attendance === "No" )
-    const verify = email && invitationURL && name && diabetic && celiac && music && attendance && vegan && anfitrionEmail && first_verify 
-    const secondVerify = diabeticVerify && musicVerify && celiacVerify && veganVerify && anfitrionEmailVerify && attendanceVerify
-   try{
-    console.log( verify)
-    console.log( secondVerify)
-    if( verify && secondVerify ){
+    const diet = body.diet
+    const user = body.user
 
-        await sendAnfitrion( anfitrionEmail , name , diabetic , celiac , music , attendance , vegan )
-        .then( async ()=>{
-            console.log("enviado al user")
-            await send( email , invitationURL )
-            .then(( response )=>{ 
-                console.log("enviado a todos")
-                res.status(200).json( { message : "success, all invitations have been sent" } )
-            })
-            .catch(( error )=>{
-                 res.status(400).json( { error : "cannot send invitation" } )
-                 console.log(error)
-                })
-        })
-        .catch((error)=>{
-            console.log(error)
-           res.status(400).json( { error : error } )
-        })
-       
-        
+    
+    const first_verify = typeof email === "string" && email.includes("@")&& typeof name === "string"
+    const dietVerify = typeof diet === "string" 
+    const userVerify = typeof user === "string" 
+    const musicVerify =  typeof music === "string" 
+    const attendanceVerify = typeof attendance === "string" && ( attendance === "Sí" || attendance === "No" )
+    const verify = email && name && diet && music && attendance && first_verify 
+    const secondVerify = dietVerify && musicVerify && attendanceVerify && userVerify
+
+   try{
+
+    if( verify && secondVerify ){
+            const add_Guest = await usersServices.addGuest( diet , music , email , attendance , user , name ) 
+            if( add_Guest ){
+              res.status( 200 ).json( { message : "200OK" } )
+            }
+            else{
+              res.status( 400 ).json( { message : "Cannot add Guest" } )
+            }
        }
        else{
-        console.log("espera5 min 2")
         res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo 2" } )
        }
    }
    catch(error){
-    console.log("espera5 min 1")
-
         res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo 1" } )
    }
-
  
-   
-
-
-    
-
 }
 
-module.exports = getInvitation
+async function getCard( req , res ){
+
+    const iid = req.params.iid
+    if( iid && mongoose.isValidObjectId( iid ) ){
+
+        const cardByIID = await usersServices.getCardById( iid )
+        if( cardByIID ){
+            res.status( 200 ).json( { message : "200OK" , card : cardByIID } )
+        }
+        else{
+            res.status( 400 ).json( { error : `IID: ${ iid } doesn´t exists` } )
+        }
+    }
+    else{
+        res.status( 400 ).json( { error : "Try with a valid object iid" } )
+    }
+}
+
+module.exports = { getCard , addGuestInformation }

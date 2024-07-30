@@ -1,36 +1,37 @@
 const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
+const mongoose = require('mongoose');
+const path = require('path');
 
-
-const invitation = require("./routes/invitation.router")
+const invitation = require("./routes/invitation.router.js")
+const users = require("../src/routes/users.router.js")
 
 const cors = require('cors');
 const cluster = require('cluster');
 const os = require('os');
-const { send, sendAdmin } = require("./mailing/send");
 const numCPUs = os.cpus().length;
 const handleBars = require("express-handlebars")
-
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
 
-  // Forka workers equivalentes al número de CPUs disponibles
+ 
   for (let i = 0; i < numCPUs; i++) {
       cluster.fork();
   }
-
-  // Maneja eventos cuando un worker se muere y crea uno nuevo
   cluster.on('exit', (worker, code, signal) => {
       console.log(`Worker ${worker.process.pid} died. Restarting...`);
       cluster.fork();
   });
 } else {
+  console.log("Not cluster.isMaster")
+}
 
 
 
-const PORT = 8888
+const PORT = process.env.port
+const origin = process.env.ORIGIN
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -38,19 +39,17 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin:[ "https://66886deb445f1d9636a14963--stalwart-salmiakki-a9718b.netlify.app" ],
-  credentials: true
+  origin:[ origin ],
+ credentials: true
 }));
 app.engine("handlebars", handleBars.engine())
 app.set("views", __dirname + "/views");
 app.set("view engine","handlebars")
 
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.use("/api/users" , users ) 
+app.use("/api/invitation" , invitation ) 
 
-app.use("/invitation" , invitation ) 
-app.use("/",( req , res )=>{
-
-  res.status( 200 ).render(`welcome`)
-})
 
 
 
@@ -60,4 +59,8 @@ app.listen( PORT , ()=>{
 
     console.log(`Server runing on port ${PORT}`)
 })
-}
+
+
+mongoose.connect( process.env.MONGO_URL )
+ .then( ()=>{ console.log( "database connected" ) } )
+ .catch( ( error )=> { console.log( "Error cannot connect database" ) } )

@@ -1,43 +1,56 @@
-const jwt = require("jsonwebtoken")
-const generaJWT = require("../jwt/generaJwt")
-const key01 = process.env.key00 || "5233ed244dfASSmjsjn7ha..JSD8AJ9dn1sj10" //el secret q tiene q estar en el header pero codificado con jwt y con bcrypt
-const key03 = process.env.key03 || "F3sT8JN08Nb8vZX3cQr6nk,kl9jnjj7YBH88"
 const bcrypt = require("bcrypt")    
+const { jwtAdminVerify , jwtVerify } = require("../jwt/jwtVerify")
+const user_admin = process.env.user_admin
 
 
-
-    const jwtVerify = ( req , res , next )=>{
-    
-        const token = req.cookies["4eb12nsb433nsh1ma7SHD7nsia8"]
-        jwt.verify( token , key01 , async ( error , credentials )=>{
-    
-            if( credentials ){
-            console.log("credenciales machean")
-             
-                const secret = credentials.secret 
-                const final_verification = await bcrypt.compare( key03 , secret )
-                if( final_verification ){
-                    console.log("credenciales bcrypu machean tambien")
-                    next()
-                }
-                else{
-                console.log("credenciale 2 sno machean")
-
-                    res.status( 400 ).json( { error : error } )
-                }
-               
-            }
-            else if( error ){
-            console.log("credenciales no machean")
-   
-                res.status( 400 ).json( { error : error } )
+    const adminVerify = async ( req , res , next )=>{
+        const token = req.cookies.admin_cookie
+        if( !token ){
+            res.status(400).redirect("/api/users/admin-login-ui")
+        }
+        else{
+            try{
+            const verify = await jwtAdminVerify( token )
+            if( verify && verify.secret ){
+             const compare_codeUser = await bcrypt.compare( user_admin , verify.secret )
+             if( !compare_codeUser ){
+                res.status(400).redirect("/api/users/admin-login-ui")
+             }
+             else{
+                next()
+             }
             }
             else{
-                res.status( 400 ).json( { error : "Cannot validate token" } )
+             res.status(400).redirect("/api/users/admin-login-ui")
             }
-          
-    
-        })
+         }
+         catch( error ){
+           res.status( 400 ).redirect( "/api/users/admin-login-ui" )
+         }
+       }
     }
-    module.exports = jwtVerify
+
+
+    const hostVerify = async ( req , res , next )=>{
+      const token = req.cookies.host_cookie
+      if( !token ){
+          res.status(400).json( { error : "Not host cookie" } )
+      }
+      else{
+          try{
+          const verify = await jwtVerify( token )
+          if( verify && verify.secret ){
+            next()
+          }
+          else{
+            res.status(400).json( { error : "Invalid Token" } )
+          }
+       }
+       catch( error ){
+        res.status(400).json( { error : "Invalid Token" } )
+       }
+     }
+  }
+
+module.exports = { adminVerify , hostVerify }
 
