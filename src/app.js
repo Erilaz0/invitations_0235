@@ -48,8 +48,8 @@ app.set("views", __dirname + "/views");
 app.set("view engine","handlebars")
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-app.use("/api/users" , cors( origin ) , users ) 
-app.use("/api/invitation" , cors( origin ) , invitation ) 
+app.use("/api/users" , users ) 
+app.use("/api/invitation" , invitation ) 
 
 
 
