@@ -252,11 +252,7 @@ const login_user = async ( req , res )=>{
       if( get_credentials ){
         const verify_password = await bcrypt.compare( password , get_credentials.password )
         if( verify_password ){
-          const verify_user = await userServices.verifyUser( user , password )
-          if( verify_user === null ){
-            res.status( 400 ).json( { unauthorized : "Credentials not match" })
-          }
-          else if( verify_user.user && verify_user.email && verify_user.password && verify_user._id ){
+         
             const guests_data = {
               user : user,
               email : email,
@@ -272,10 +268,6 @@ const login_user = async ( req , res )=>{
                  expires: expireDate    
             } )
             res.status( 200 ).json( { message : "200OK" } )
-          }
-          else{
-            res.status( 500 ).json( { error_server : "Server error" })
-          }
         }
         else{
           res.status( 500 ).json( { error : "Invalid password" })
