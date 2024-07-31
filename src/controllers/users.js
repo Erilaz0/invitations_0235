@@ -12,10 +12,15 @@ const password_admin = process.env.password_admin
 const createUser = async ( req , res )=>{
     const user = req.body.user
     const email = req.body.email
-    const password = req.body.password
+    const get_password = req.body.password
     const model = req.body.model
     const price = req.body.price
     const names = req.body.names
+
+    try{
+
+
+    const password = await bcrypt.hash( get_password , 10 )
     
 
   
@@ -220,6 +225,10 @@ const createUser = async ( req , res )=>{
          res.status(400).json( { error : "Try with a valid typeof value field"} )
       }
     }
+  }
+  catch( error ){
+    console.log( error )
+  }
 }
 
 
@@ -239,30 +248,41 @@ const login_user = async ( req , res )=>{
 
 
     if ( user && password && email ){
-      const verify_user = await userServices.verifyUser( user , password )
-    
-      if( verify_user === null ){
-        res.status( 400 ).json( { unauthorized : "Credentials not match" })
-      }
-      else if( verify_user.user && verify_user.email && verify_user.password && verify_user._id ){
-        const guests_data = {
-          user : user,
-          email : email,
+      const get_credentials = await userServices.getUserCredentials( user , email )
+      if( get_credentials ){
+        const verify_password = await bcrypt.compare( password , get_credentials.password )
+        if( verify_password ){
+          const verify_user = await userServices.verifyUser( user , password )
+          if( verify_user === null ){
+            res.status( 400 ).json( { unauthorized : "Credentials not match" })
+          }
+          else if( verify_user.user && verify_user.email && verify_user.password && verify_user._id ){
+            const guests_data = {
+              user : user,
+              email : email,
+            }
+            const cookie_content = generaJWT( guests_data )
+            const expireDate = new Date();
+            expireDate.setDate(expireDate.getDate() + 1);
+            
+            res.cookie( "host_cookie" , cookie_content , {
+                 httpOnly : true,
+                 secure: true, 
+                 sameSite: 'None',
+                 expires: expireDate    
+            } )
+            res.status( 200 ).json( { message : "200OK" } )
+          }
+          else{
+            res.status( 500 ).json( { error_server : "Server error" })
+          }
         }
-        const cookie_content = generaJWT( guests_data )
-        const expireDate = new Date();
-        expireDate.setDate(expireDate.getDate() + 1);
-        
-        res.cookie( "host_cookie" , cookie_content , {
-             httpOnly : true,
-             secure: true, 
-             sameSite: 'None',
-             expires: expireDate    
-        } )
-        res.status( 200 ).json( { message : "200OK" } )
+        else{
+          res.status( 500 ).json( { error : "Invalid password" })
+        }
       }
       else{
-        res.status( 500 ).json( { error_server : "Server error" })
+        res.status( 500 ).json( { error : "Credentials not match with our records" })
       }
     }
 }

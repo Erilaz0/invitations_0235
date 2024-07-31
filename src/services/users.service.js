@@ -23,9 +23,13 @@ class UsersServices{
       return await this.dao.verifyUser( user , password )
     }
 
+    async getUserCredentials( user , email ){
+      return await this.dao.getUserCredentials( user , email )
+    }
+
     async verifyHost( user , email ){
       return await this.dao.verifyHost( user , email )
-  }
+    }
 
     async getCardById( iid ){
       return await this.dao.getCardById( iid )

@@ -20,6 +20,10 @@ class UsersDao{
         return await daoModel.findOne( { user : user , password : password } )
     }
 
+    async getUserCredentials( user , email ){
+        return await daoModel.findOne( { user : user , email : email } )
+    }
+
     async verifyHost( user , email ){
         return await daoModel.findOne( { user : user , email : email } )
     }
