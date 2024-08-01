@@ -31,8 +31,6 @@ if (cluster.isMaster) {
 
 
 const PORT = process.env.PORT
-const origin = process.env.ORIGIN
-console.log(`ORIGIN: ${ origin }`)
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -40,7 +38,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin:[ origin ],
+  origin:[ "https://dainty-creponne-d0f30d.netlify.app" ],
  credentials: true
 }));
 app.engine("handlebars", handleBars.engine())
