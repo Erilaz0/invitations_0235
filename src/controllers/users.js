@@ -47,6 +47,8 @@ const createUser = async ( req , res )=>{
       const imagen8 = req.body.imagen8
       const event_theme = req.body.event_theme
       const music = req.body.music
+      const names_font = req.body.names_font
+      const event_theme_font = req.body.event_theme_font
 
       const images = {
         imagen1,
@@ -62,7 +64,7 @@ const createUser = async ( req , res )=>{
 
       if ( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme )
+        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
@@ -100,6 +102,8 @@ const createUser = async ( req , res )=>{
       const imagen12 = req.body.imagen12
       const kids = req.body.kids
       const music = req.body.music
+      const names_font = req.body.names_font
+      const event_theme_font = req.body.event_theme_font
 
 
       const images = {
@@ -119,7 +123,7 @@ const createUser = async ( req , res )=>{
 
       if ( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme )
+        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
@@ -150,6 +154,8 @@ const createUser = async ( req , res )=>{
       const imagen4 = req.body.imagen4
       const imagen5 = req.body.imagen5
       const music = req.body.music
+      const names_font = req.body.names_font
+      const event_theme_font = req.body.event_theme_font
 
       const images = {
         imagen1,
@@ -161,7 +167,7 @@ const createUser = async ( req , res )=>{
 
       if( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme )
+        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }

@@ -1,0 +1,14 @@
+//this file contains all the fonts used in greenlaz-invitations 
+
+//Tangerine - "Tangerine", cursive
+//Allura - "Allura", cursive
+//Dancing script - "Dancing Script", cursive
+//Herr Von Muellerhoff -  "Herr Von Muellerhoff", cursive
+//Cookie - "Cookie", cursive
+//Zeyada - "Zeyada", cursive
+//Great Vibes - "Great Vibes", cursive
+//Yellowtail - "Yellowtail", cursive
+//Sacramento - "Sacramento", cursive
+//Grey Qo - "Grey Qo", cursive
+//Indie Flower - "Indie Flower", cursive
+
