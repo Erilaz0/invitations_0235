@@ -30,7 +30,7 @@ if (cluster.isMaster) {
 */
 
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -38,7 +38,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin:[ "https://66ad2ad064f3fcae4337762b--funny-conkies-0e64ee.netlify.app" ],
+  origin:[ "http://localhost:3000" ],
  credentials: true
 }));
 app.engine("handlebars", handleBars.engine())
@@ -59,7 +59,7 @@ app.listen( PORT , ()=>{
     console.log(`Server runing on port ${PORT}`)
 })
 
-const MONGO_URL = process.env.MONGO_URL
+const MONGO_URL = process.env.MONGO_URL 
 mongoose.connect( MONGO_URL )
  .then( ()=>{ console.log( "database connected" ) } )
  .catch( ( error )=> { console.log( error ) } )
