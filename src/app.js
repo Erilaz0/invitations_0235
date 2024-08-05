@@ -38,7 +38,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin:[ "http://localhost:3000" ],
+  origin:[ "https://66b12c650a2f970456783614--scintillating-lily-f98c2f.netlify.app" ],
  credentials: true
 }));
 app.engine("handlebars", handleBars.engine())
