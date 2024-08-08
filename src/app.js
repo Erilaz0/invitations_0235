@@ -36,9 +36,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 
-
 app.use(cors({
-  origin:[ "https://66b13563f46ccd063faeb365--astonishing-malasada-e89f8c.netlify.app" ],
+  origin:[ "https://greenlazcard.netlify.app" ],
  credentials: true
 }));
 app.engine("handlebars", handleBars.engine())

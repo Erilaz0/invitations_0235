@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt")    
 const { jwtAdminVerify , jwtVerify } = require("../jwt/jwtVerify")
-const user_admin = process.env.user_admin
+const user_admin = process.env.user_admin 
 
 
     const adminVerify = async ( req , res , next )=>{
