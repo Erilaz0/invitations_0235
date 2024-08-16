@@ -30,12 +30,12 @@ if (cluster.isMaster) {
 */
 
 
-const PORT = process.env.PORT 
+const PORT = process.env.PORT || 8888
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-
+//https://greenlazcard.netlify.app
 app.use(cors({
   origin:[ "https://greenlazcard.netlify.app" ],
  credentials: true
@@ -58,7 +58,7 @@ app.listen( PORT , ()=>{
     console.log(`Server runing on port ${PORT}`)
 })
 
-const MONGO_URL = process.env.MONGO_URL 
+const MONGO_URL = process.env.MONGO_URL || "mongodb+srv://diego:QLBN9OVLBgbTPMrp@cluster0.8pnmvnk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect( MONGO_URL )
  .then( ()=>{ console.log( "database connected" ) } )
  .catch( ( error )=> { console.log( error ) } )

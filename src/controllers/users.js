@@ -24,7 +24,7 @@ const createUser = async ( req , res )=>{
     
 
   
-    if( model === "goldenLight" || model === "gardenLight" ){
+    if( model === "goldenLight" || model === "gardenLight" || "pink"){
 
       const event_address = req.body.event_address
       const party_address = req.body.party_address
@@ -49,6 +49,7 @@ const createUser = async ( req , res )=>{
       const music = req.body.music
       const names_font = req.body.names_font
       const event_theme_font = req.body.event_theme_font
+      const message = req.body.message
 
       const images = {
         imagen1,
@@ -64,7 +65,7 @@ const createUser = async ( req , res )=>{
 
       if ( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
+        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , message , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
