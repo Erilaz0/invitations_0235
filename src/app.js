@@ -58,7 +58,7 @@ app.listen( PORT , ()=>{
     console.log(`Server runing on port ${PORT}`)
 })
 
-const MONGO_URL = process.env.MONGO_URL 
+const MONGO_URL = process.env.MONGO_URL
 mongoose.connect( MONGO_URL )
  .then( ()=>{ console.log( "database connected" ) } )
  .catch( ( error )=> { console.log( error ) } )

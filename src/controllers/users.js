@@ -2,6 +2,7 @@ const userServices = require("../services/users.service")
 const bcrypt = require("bcrypt")
 const { generaJWT , generaAdminJWT } = require("../jwt/generaJwt") 
 const { jwtVerify } = require("../jwt/jwtVerify")
+const { isValidObjectId, default: mongoose } = require("mongoose")
 const user_admin = process.env.user_admin 
 const password_admin = process.env.password_admin 
 
@@ -259,7 +260,7 @@ const login_user = async ( req , res )=>{
       if( get_credentials ){
         const verify_password = await bcrypt.compare( password , get_credentials.password )
         if( verify_password ){
-         
+    
             const guests_data = {
               user : user,
               email : email,
@@ -284,7 +285,92 @@ const login_user = async ( req , res )=>{
         res.status( 500 ).json( { error : "Credentials not match with our records" })
       }
     }
+    else{
+      res.status( 500 ).json( { error : "Credentials not match with our records" })
+    }
 }
+
+
+
+
+const addGuest_tables = async ( req , res )=>{
+
+  const user = req.body.user
+  const table_name = req.body.table_name
+  const table = req.body.table_name
+  const email = req.body.email
+
+  if( user , table_name , email ){
+   const findGuest = await userServices.findGuest( user , email)
+   const find_Table = await userServices.findTable( user , table_name )
+   if( !findGuest && !find_Table ){
+    res.status( 400 ).json( { error : "Guest Or Table Doesn´t exists" })
+   }
+   else{
+      const changeTable = await userServices.changeGuestTable( user , email , table )
+      if( !changeTable ){
+        res.status( 400 ).json( { error : "Cannot change table porperty" })
+      }
+      else{
+        res.status( 200 ).json( { message : "200OK" })
+      }
+    }  
+  }
+  else{
+    res.status( 400 ).json( { error : "Invalid data" })
+  }
+}
+
+
+const delete_Table = async ( req , res )=>{
+
+  const user = req.body.user
+  const table_name = req.body.table_name
+  
+  if( user && table_name && typeof table_name === "number" ){
+    const removeTable = await userServices.deleteTable( user , table_name )
+    if( removeTable.modifiedCount ){
+      res.status( 200 ).json( { message : "200OK" } )       
+    }
+    else{
+      res.status( 400 ).json( { error : "Error Removing Table" }) 
+    }
+  }
+  else{
+    res.status( 400 ).json( { error : "Invalid data" })
+  }
+
+}
+
+
+
+const addTable = async ( req , res )=>{
+  const user = req.body.user
+  const table_name = req.body.table_name
+
+  if( user && typeof table_name === "number" ){
+    const find_Table = await userServices.findTable( user , table_name )
+    if( find_Table ){
+      res.status( 400 ).json( { table_exist : "This table already exists" })
+    }
+    else{
+      const add = await userServices.createTable( user , table_name )
+      if( !add ){
+        res.status( 400 ).json( { error : "Invalid data" })
+      }
+      else{
+        res.status( 200 ).json( { message : "200OK" })
+      }
+    }
+  }
+  else{
+    res.status( 400 ).json( { error : "El Nombre de la mesa tiene q ser un numero." })
+  }
+}
+
+
+
+
 
 
 const get_guests_data = async ( req , res )=>{
@@ -305,7 +391,8 @@ const get_guests_data = async ( req , res )=>{
          res.status( 401 ).json( { error : "Unauthorized" } )
        }
        else{
-        res.status( 200 ).json( { message : "200OK" , data : verify_host.guests } )
+
+        res.status( 200 ).json( { message : "200OK" , id : verify_host._id , data : verify_host.guests , tables : verify_host.guestTable } )
        }
       }
     }
@@ -355,4 +442,21 @@ const admin_login = async ( req, res )=>{
   }
 }
 
-module.exports = { admin_login_UI , admin_login , createUser , createUserUI , login_user , get_guests_data }
+
+const deleteGuest = async ( req , res )=>{
+
+  const user = req.body.user
+  const email = req.body.email
+
+  if( user && mongoose.isValidObjectId( user ) && email.includes("@") ){
+    const deleteSelectedGuest = await userServices.deleteGuest( user , email )
+    if( !deleteSelectedGuest ){
+      res.status( 400 ).json( { error : "Cannot delete guest" } )
+    }
+    else{
+      res.status( 200 ).json( { message : "200OK" } )
+    }
+  }
+}
+
+module.exports = { deleteGuest , admin_login_UI , delete_Table , admin_login , createUser , addGuest_tables , addTable , createUserUI , login_user , get_guests_data }

@@ -58,8 +58,22 @@ const usersSchema = new mongoose.Schema({
          diet : { type : String , required : false } , 
          email : { type : String , required : false } ,
          music : { type : String , required : false } , 
+         table : { type : String , required : false , default : "Sin Mesa"},
          attendance : { type : String , required : false } 
-        } ]
+        } ],
+    guestTable : [
+        {
+            table_name : { type : Number , required : true },
+            guests : [
+                {
+                    name : { type : String , required : false },
+                    diet : { type : String , required : true , default : "Ninguna" },
+                    email : { type : String , required : false }
+                }
+            ]
+
+        }
+    ]
 });
 
 

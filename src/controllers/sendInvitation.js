@@ -1,5 +1,6 @@
 const { default : mongoose } = require("mongoose");
 const usersServices = require("../services/users.service");
+const bcrypt = require("bcrypt")
 
 
 
@@ -23,8 +24,9 @@ async function addGuestInformation( req , res ){
     const secondVerify = dietVerify && musicVerify && attendanceVerify && userVerify
 
    try{
-
-    if( verify && secondVerify ){
+     const verifyGuest = await usersServices.findGuest( user , email )
+     if( !verifyGuest ){
+        if( verify && secondVerify ){
             const add_Guest = await usersServices.addGuest( diet , music , email , attendance , user , name ) 
             if( add_Guest ){
               res.status( 200 ).json( { message : "200OK" } )
@@ -34,8 +36,13 @@ async function addGuestInformation( req , res ){
             }
        }
        else{
-        res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo 2" } )
+        res.status(400).json( { error : "Error en la data del usuario" } )
        }
+     }
+     else{
+        res.status(400).json( { email_error : "Este Email ya existe" } )
+     }
+
    }
    catch(error){
         res.status(400).json( { error : "No es posible enviar la confirmacion, espera 5 minutos y vuelve a intentarlo 1" } )
