@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt")
 const { generaJWT , generaAdminJWT } = require("../jwt/generaJwt") 
 const { jwtVerify } = require("../jwt/jwtVerify")
 const { isValidObjectId, default: mongoose } = require("mongoose")
-const user_admin = process.env.user_admin || "123456"
-const password_admin = process.env.password_admin || "78910"
+const user_admin = process.env.user_admin 
+const password_admin = process.env.password_admin 
 
 
 

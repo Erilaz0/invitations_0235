@@ -20,10 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-//https://greenlazcard.netlify.app
 
 app.use(cors({
-  origin:[ "http://localhost:3000" ],
+  origin:[ "https://greenlazcard.netlify.app" ],
   credentials: true
 }));
 app.engine("handlebars", handleBars.engine())
