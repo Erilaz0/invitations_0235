@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken")
-const key01 = process.env.key01 
-
-const keyAdmin = process.env.keyAdmin 
+const key01 = process.env.key01 || "32324"
+const keyAdmin = process.env.keyAdmin || "121212"
 
 
 

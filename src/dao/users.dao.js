@@ -1,15 +1,23 @@
 const daoModel = require("./models/users.models")
 
 class UsersDao{
-
+    
     constructor(){}
 
-    async createUserPrime( user , email , password , message , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font ){
-        return await daoModel.create( { user , email , message , password , music , model , price , names , invitation_url , images, event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font } )
+    async createUserPrime( user , email , password , message , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , date , kids , names_font ){
+        return await daoModel.create( { user : user , email : email ,password : password , message : message, music : music , model : model , price : price , names : names , images : images , event_address : event_address , party_address : party_address , party_text : party_text, event_text: event_text , account_text : account_text , dress_code : dress_code , bar : bar , date : date, kids : kids , names_font : names_font } )
     }
     
-    async createUserSecundary( user , email , password , model , music  , price , names , invitation_url , images , event_address , account_text , date , all_text , gender ){
-        return await daoModel.create( { user , email , password , music , model , price , names , invitation_url , images, event_address , account_text , date , all_text , gender } )
+    async createUserGG(user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids ){
+        return await daoModel.create( { user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids  } )
+    }
+
+    async createModern( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids , event_theme ){
+        return await daoModel.create( { user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids , event_theme } )
+    }
+    
+    async createUserSecundary( user , email , password , music , model , price , names , images , event_address , account_text , date , all_text , gender ){
+        return await daoModel.create( { user , email , password , music , model , price , names , images , event_address , account_text , date , all_text , gender } )
     }
 
     async addGuest( diet , music , email , attendance , user , name ){
@@ -30,6 +38,14 @@ class UsersDao{
 
     async findGuest( user , email ){
         return await daoModel.findOne( { _id : user , "guests.email" : email })
+    }
+
+    async deleteUser( id ){
+        return await daoModel.deleteOne( { _id : id } )
+    }
+
+    async findUser( id ){
+        return await daoModel.findOne( { _id : id } )
     }
 
     async deleteGuest( user , email ){
@@ -54,6 +70,10 @@ class UsersDao{
 
     async verifyHost( user , email ){
         return await daoModel.findOne( { user : user , email : email } )
+    }
+
+    async getUsers(){
+        return await daoModel.find({})
     }
 
     async getCardById( iid ){

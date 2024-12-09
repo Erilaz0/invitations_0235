@@ -3,10 +3,11 @@
      <div class="links">
         <a href="/api/users/createui">Crear</a>
         <a href="/api/users/allusers">Usuarios</a>
-         <a href="/api/invitation/music/addui">Musica</a>
-         <a href="/api/users/guide">Guia</a>         
+        <a href="/api/invitation/music/addui">Musica</a>
+        <a href="/api/users/guide">Guia</a>
     </div>
 </nav>
+
 <nav class="nav_two">
     <p class="admin_two">Admin Login</p>
      <div class="links_two">
@@ -17,10 +18,24 @@
     </div>
      <img onclick="nav_appear()" class="barras" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2F3_barras.png?alt=media&token=1d4c9ac0-48e7-4933-a267-dca272e7d71f">
 </nav>
-<form class="music" style="margin-top: 50px; margin-left: 10px" action="/api/invitation/music/add" method="post" enctype="multipart/form-data">
-  <input type="file" id="fileInput" name="music" accept="audio/*" />
-  <button type="submit">Load</button>
-</form>
+
+<div class="guia">
+ <div class="box"> 3 </div>
+ <p class="guide_text">El cuadrado transparente indica la foto y su respectiva posicion, cada invitacion tiene un limite de fotos que
+  se puede subir, cada cuadrado tiene un numero asociado, al hacer la invitacion podras apreciar
+  que te pide, imagen1, imagen2, etc, imagen1 corresponde al cuadrado con el numero 1 e imagen2 corresponde
+  al cuadrado con el numero 2 y asi sucesivamente .
+ </p>
+</div>
+
+
+<div class="images">
+ <img class="image_item" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2Fgolden.png?alt=media&token=f08ce79e-5a6d-4231-acc2-8d93e8ac91cc">
+ <img class="image_item" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2Fgreen.png?alt=media&token=111d28c2-7cdd-4241-9f74-d04595aad5e9">
+ <img class="image_item" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2Fmodern.png?alt=media&token=db72a4cc-5db0-435b-8f68-e1c08b0040de">
+ <img class="image_item" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2FTu%20Historia%20Publicidad%20Agencia%20de%20Marketing%20Org%C3%A1nico%20Rosa%20(6).png?alt=media&token=651fae5a-da68-4b3f-9349-f5c9016b6e4a">
+ <img class="image_item" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2FTu%20Historia%20Publicidad%20Agencia%20de%20Marketing%20Org%C3%A1nico%20Rosa%20(7).png?alt=media&token=5ee4ccb3-5c3b-4cfc-8a70-c058ceaa3e48">
+</div>
 
 <script>
   function nav_appear(){
@@ -33,8 +48,9 @@
     }
   }
 </script>
+
 <style>
-   .nav_two{
+  .nav_two{
     display: none;
   }
   .barras{
@@ -94,12 +110,18 @@
       color: #ffffff;
      }
   }
+
+
   body{
     margin:0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     z-index: -5;
   }
-  nav{
+  .nav_one{
         background-color: rgb(127, 167, 133);
         height: 70px;
         width: 100%;
@@ -107,12 +129,72 @@
         
     }
 
-    .music{
-     position: relative;
-     z-index: -1;
-    }
 
-    .links{
+.guia{
+ width: 90%;
+ min-height: 300px ;
+ margin-top: 50px;
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 20px;
+ position: relative;
+ z-index: -1;
+ border-bottom: 1px solid #999999;
+}
+
+.box{
+ width: 200px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 200px;
+ background-color: #aa56565f;
+ font-size: 25px;
+ z-index: 0;
+ position: fixed;
+ color: #ffffff;
+}
+
+.guide_text{
+ font-family: 'Courier New', Courier, monospace;
+ font-size: 20px;
+ width: 600px;
+ margin-top: 250px;
+}
+
+.images{
+ width: 100%;
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 30px;
+ margin-top: 50px;
+
+
+}
+
+.image_item{
+width: 300px;
+height: 500px;
+border: 2px solid #999999;
+border-radius: 10px;
+}
+
+
+h1{
+  background-color: rgb(127, 167, 133);
+  color: #f4f4f4;
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  transform: translateY(25px);
+}
+
+.links{
 width: 150px;
 display: flex;
 gap: 15px;

@@ -1,10 +1,10 @@
 <nav class="nav_one">
     <p class="admin">Admin Login</p>
-     <div class="links">
+    <div class="links">
         <a href="/api/users/createui">Crear</a>
         <a href="/api/users/allusers">Usuarios</a>
-         <a href="/api/invitation/music/addui">Musica</a>
-         <a href="/api/users/guide">Guia</a>         
+        <a href="/api/invitation/music/addui">Musica</a>
+         <a href="/api/users/guide">Guia</a>        
     </div>
 </nav>
 <nav class="nav_two">
@@ -17,12 +17,41 @@
     </div>
      <img onclick="nav_appear()" class="barras" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2F3_barras.png?alt=media&token=1d4c9ac0-48e7-4933-a267-dca272e7d71f">
 </nav>
-<form class="music" style="margin-top: 50px; margin-left: 10px" action="/api/invitation/music/add" method="post" enctype="multipart/form-data">
-  <input type="file" id="fileInput" name="music" accept="audio/*" />
-  <button type="submit">Load</button>
-</form>
+<div class="contenedor">
+  {{#each users}}
+    <div class="user">
+        <p> id: {{ _id }}</p>
+        <p>Usuario: {{ user }}</p>
+        <p>Email: {{ email }}</p>
+        <p>Fecha: {{ date }}</p>
+        <p>Modelo: {{ model }}</p>
+        <p>Precio: ${{ price }}</p>
+        <button onclick="deleteUser('{{_id}}')" id={{ _id }}>Eliminar</button>
+    </div>
+  {{/each}}
+
+</div>
 
 <script>
+    async function deleteUser( id ){
+        const verify = prompt("seguro que quieres eliminar este usuario? \n1.si \n2.no")
+        if( verify === "1" ){
+         const request = await fetch(`/api/users/deleteUser/${ id }`,{
+            method : "DELETE",
+            credentials : "same-origin"
+         })
+        if( request.ok ){
+          location.reload();
+        }
+        else{
+         alert("No es posible eliminar este usuario")
+        }
+       }
+       else{
+        console.log("Usuario no eliminado")
+       }
+    }
+
   function nav_appear(){
     const nav = document.getElementsByClassName("links_two")[0]
     if( nav.style.display === "none" ){
@@ -32,9 +61,11 @@
       nav.style.display = "none"
     }
   }
+
 </script>
+
 <style>
-   .nav_two{
+     .nav_two{
     display: none;
   }
   .barras{
@@ -94,31 +125,23 @@
       color: #ffffff;
      }
   }
-  body{
-    margin:0;
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
     z-index: -5;
-  }
-  nav{
-        background-color: rgb(127, 167, 133);
-        height: 70px;
-        width: 100%;
-        display: flex;
-        
-    }
+}
 
-    .music{
-     position: relative;
-     z-index: -1;
-    }
-
-    .links{
+.links{
 width: 150px;
 display: flex;
 gap: 15px;
 justify-content: center;
 align-items: center;
 height: 100%;
+position: relative;
 margin-left: 15%;
 }
 .links a{
@@ -131,6 +154,42 @@ margin-left: 15%;
  
 }
 
+button{
+    width: 100px;
+    background-color: rgb(233, 59, 59);
+    border: 0px;
+    height: 30px;
+    color: #f4f4f4;
+}
+
+.contenedor{
+    overflow: auto;
+    height: 800px;
+    width: 100%;
+    position: relative;
+    z-index: -1;
+
+    
+}
+
+.user{
+    background-color: antiquewhite;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+ body{
+    margin:0;
+  }
+  nav{
+        background-color: rgb(127, 167, 133);
+        height: 70px;
+        width: 100%;
+        display: flex;
+        
+    }
+
     .admin{
         margin: 0;
         font-size: 25px;
@@ -139,4 +198,5 @@ margin-left: 15%;
         padding-left: 30px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
+
 </style>

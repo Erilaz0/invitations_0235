@@ -7,12 +7,20 @@ class UsersServices{
     }
 
    
-    async createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , party , date, kids , event_theme , names_font , event_theme_font ){
-      return await this.dao.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
+    async createUserPrime( user , email , password , message , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , date , kids , names_font ){
+      return await this.dao.createUserPrime( user , email , password , message , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , date , kids , names_font )
     }
 
-    async createUserSecundary( user , email , password , music , model , price , names , invitation_url , images , event_address , account_text , date , all_text , gender ){
-      return await this.dao.createUserSecundary( user , email , password , music , model , price , names , invitation_url , images, event_address , account_text , date , all_text , gender )
+    async createUserGG( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids  ){
+      return await this.dao.createUserGG( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids )
+    }
+
+    async createModern( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids  ){
+      return await this.dao.createUserGG( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids )
+    }
+
+    async createUserSecundary( user , email , password , music , model , price , names , images , event_address , account_text , date , all_text , gender ){
+      return await this.dao.createUserSecundary( user , email , password , music , model , price , names , images , event_address , account_text , date , all_text , gender )
     }
 
     async addGuest( diet , music , email , attendance , user , name ){
@@ -22,6 +30,14 @@ class UsersServices{
     async addGuestToTable( user , table_name , name , diet , email ){
       return await this.dao.addGuestToTable( user , table_name , name , diet , email)
     } 
+
+    async deleteUser( id ){
+      return await this.dao.deleteUser( id )
+    }
+
+    async findUser( id ){
+      return await this.dao.findUser( id )
+    }
 
     async deleteGuest( user , email ){
       return await this.dao.deleteGuest( user , email )
@@ -66,6 +82,10 @@ class UsersServices{
     async getCardById( iid ){
       return await this.dao.getCardById( iid )
     }
+
+    async getUsers(){
+      return await this.dao.getUsers()
+  }
 }
 
 const usersDao = new UsersDao()

@@ -1,20 +1,40 @@
-<div style="width: 100%; display:flex; justify-content:center; margin-top:100px;">
+<nav class="nav_one">
+    <p class="admin">Admin Login</p>
+     <div class="links">
+        <a href="/api/users/createui">Crear</a>
+        <a href="/api/users/allusers">Usuarios</a>
+         <a href="/api/invitation/music/addui">Musica</a>
+         <a href="/api/users/guide">Guia</a>
+    </div>
+</nav>
+<nav class="nav_two">
+    <p class="admin_two">Admin Login</p>
+     <div class="links_two">
+        <a href="/api/users/createui">Crear</a>
+        <a href="/api/users/allusers">Usuarios</a>
+        <a href="/api/invitation/music/addui">Musica</a>
+        <a href="/api/users/guide">Guia</a>
+    </div>
+     <img onclick="nav_appear()" class="barras" src="https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2F3_barras.png?alt=media&token=1d4c9ac0-48e7-4933-a267-dca272e7d71f">
+</nav>
+<div style="width: 100%; display:flex; flex-direction: column; justify-content:center; align-items:center; margin-top:139px;">
+ <h1>Crear Invitacion white, rose, pumpkin</h1>
  <form method="post" action="/api/users/create" style="display: flex; flex-direction:column ; width:300px;">
-  <label for="user">User</label>
+  <label for="user">User ( nombre del anfitrion )</label>
   <input id="user" name="user"></input>
-  <label for="password">Password</label>
+  <label for="password">Password ( contraseña del anfitrion )</label>
   <input id="password" name="password"></input>
   <label for="email">Email</label>
   <input id="email" name="email"></input>
-  <label for="music">Music</label>
+  <label for="music">Musica</label>
   <input id="music" name="music"></input>
-  <label for="price">Price</label>
-  <input id="message" name="message"></input>
-  <label for="message">Message</label>
+  <label for="price">Precio</label>
   <input id="price" name="price"></input>
-  <label for="names">Names</label>
+  <label for="message">Mensaje</label>
+  <input id="message" name="message"></input>
+  <label for="names">Nombres</label>
   <input id="names" name="names"></input>
-  <label for="names_font">Names Font</label>
+  <label for="names_font">Fuente de los nombres</label>
   <select id="names_font" name="names_font">
     <option value="Tangerine, cursive">Tangerine</option>
     <option value="Allura, cursive">Allura</option>
@@ -28,10 +48,149 @@
     <option value="Grey Qo, cursive">Grey Qo</option>
     <option value="Indie Flower, cursive">Indie Flower</option>
   </select>
-  <label for="event_theme">Event Theme</label>
-  <input id="event_theme" name="event_theme"></input>
-  <label for="event_theme_font">Event Theme Font</label>
-  <select id="event_theme_font" name="event_theme_font">
+  <label for="event_address">Ubicacion del Evento</label>
+  <input id="event_address" name="event_address"></input>
+  <label for="party_address">Ubicacion de la fiesta</label>
+  <input id="party_address" name="party_address"></input>
+  <label for="party_text">Fiesta sub texto</label>
+  <input id="party_text" name="party_text"></input>
+  <label for="event_text">Evento sub texto</label>
+  <input id="event_text" name="event_text"></input>
+  <label for="account_text">Cuenta</label>
+  <input id="account_text" name="account_text"></input>
+  <label for="dress_code">Dress Code ( en ausencia escribir "null")</label>
+  <input id="dress_code" name="dress_code"></input>
+  <label for="bar">Bar details ( en ausencia escribir "null")</label>
+  <input id="bar" name="bar"></input>
+  <label for="kids">Kids ( en ausencia escribir "null")</label>
+  <input id="kids" name="kids"></input>
+  <label for="date">Fecha ( formato : 2024-09-31T15:30:00 )</label>
+  <input id="date" name="date"></input>
+  <label for="model">Modelo</label>
+  <select id="model" name="model">
+   <option value="rose">Rose</option>
+   <option value="pumpink">Pumpkin</option>
+   <option value="white">white</option>
+  </select>
+  <label for="imagen1">imagen1</label>
+  <input id="imagen1" name="imagen1"></input>
+  <label for="imagen2">imagen2</label>
+  <input id="imagen2" name="imagen2"></input>
+  <label for="imagen3">imagen3</label>
+  <input id="imagen3" name="imagen3"></input>
+  <label for="imagen4">imagen4</label>
+  <input id="imagen4" name="imagen4"></input>
+  <button>Create</button>
+ </form>
+ <h1>Crear Invitacion green, golden</h1>
+  <form method="post" action="/api/users/create" style="display: flex; flex-direction:column ; width:300px;">
+  <label for="user">User ( nombre del anfitrion )</label>
+  <input id="user" name="user"></input>
+  <label for="password">Password ( contraseña del anfitrion )</label>
+  <input id="password" name="password"></input>
+  <label for="email">Email</label>
+  <input id="email" name="email"></input>
+  <label for="music">Musica</label>
+  <input id="music" name="music"></input>
+  <label for="price">Precio</label>
+  <input id="price" name="price"></input>
+  <label for="names">Nombres</label>
+  <input id="names" name="names"></input>
+  <label for="event_address">Ubicacion del Evento</label>
+  <input id="event_address" name="event_address"></input>
+  <label for="party_address">Ubicacion de la fiesta</label>
+  <input id="party_address" name="party_address"></input>
+  <label for="party_text">Fiesta sub texto</label>
+  <input id="party_text" name="party_text"></input>
+  <label for="event_text">Evento sub texto</label>
+  <input id="event_text" name="event_text"></input>
+  <label for="account_text">Cuenta</label>
+  <input id="account_text" name="account_text"></input>
+  <label for="dress_code">Dress Code ( en ausencia escribir "null")</label>
+  <input id="dress_code" name="dress_code"></input>
+  <label for="bar">Bar details ( en ausencia escribir "null")</label>
+  <input id="bar" name="bar"></input>
+  <label for="kids">Kids ( en ausencia escribir "null")</label>
+  <input id="kids" name="kids"></input>
+  <label for="date">Fecha ( formato : 2024-09-31T15:30:00 )</label>
+  <input id="date" name="date"></input>
+  <label for="model">Modelo</label>
+  <select id="model" name="model">
+   <option value="goldenPlus">Golden</option>
+   <option value="gardenPlus">Garden</option>
+  </select>
+  <button type="button" onclick="recomendedGolden()">Imagen1 recomendada para golden</button>
+  <label for="imagen1">imagen1</label>
+  <input id="imagen1" name="imagen1"></input>
+  <label for="imagen2">imagen2</label>
+  <input id="imagen2" name="imagen2"></input>
+  <label for="imagen3">imagen3</label>
+  <input id="imagen3" name="imagen3"></input>
+  <label for="imagen4">imagen4</label>
+  <input id="imagen4" name="imagen4"></input>
+  <label for="imagen5">imagen5</label>
+  <input id="imagen5" name="imagen5"></input>
+  <label for="imagen6">imagen6</label>
+  <input id="imagen6" name="imagen6"></input>
+  <label for="imagen7">imagen7</label>
+  <input id="imagen7" name="imagen7"></input> 
+  <button>Create</button>
+ </form>
+ <h1>Crear Invitacion Modern </h1>
+ <form method="post" action="/api/users/create" style="display: flex; flex-direction:column ; width:300px;">
+  <label for="user">User ( nombre del anfitrion )</label>
+  <input id="user" name="user"></input>
+  <label for="password">Password ( contraseña del anfitrion )</label>
+  <input id="password" name="password"></input>
+  <label for="email">Email</label>
+  <input id="email" name="email"></input>
+  <label for="music">Musica</label>
+  <input id="music" name="music"></input>
+  <label for="price">Precio</label>
+  <input id="price" name="price"></input>
+  <label for="names">Nombres</label>
+  <input id="names" name="names"></input>
+  <label for="event_address">Ubicacion del Evento</label>
+  <input id="event_address" name="event_address"></input>
+  <label for="party_address">Ubicacion de la fiesta</label>
+  <input id="party_address" name="party_address"></input>
+  <label for="party_text">Fiesta sub texto</label>
+  <input id="party_text" name="party_text"></input>
+  <label for="event_text">Evento sub texto</label>
+  <input id="event_text" name="event_text"></input>
+  <label for="account_text">Cuenta</label>
+  <input id="account_text" name="account_text"></input>
+  <label for="dress_code">Dress Code ( en ausencia escribir "null")</label>
+  <input id="dress_code" name="dress_code"></input>
+  <label for="bar">Bar details ( en ausencia escribir "null")</label>
+  <input id="bar" name="bar"></input>
+  <label for="kids">Kids ( en ausencia escribir "null")</label>
+  <input id="kids" name="kids"></input>
+  <label for="date">Fecha ( formato : 2024-09-31T15:30:00 )</label>
+  <input id="date" name="date"></input>
+  <input type="hidden" name="model" value="modern">
+  <label for="imagen1">imagen1</label>
+  <input id="imagen1" name="imagen1"></input>
+  <label for="imagen2">imagen2</label>
+  <input id="imagen2" name="imagen2"></input>
+  <button>Create</button>
+ </form>
+  <h1>Crear Invitacion Baby Shower</h1>
+  <form method="post" action="/api/users/create" style="display: flex; flex-direction:column ; width:300px;">
+  <label for="user">User ( nombre del anfitrion )</label>
+  <input id="user" name="user"></input>
+  <label for="password">Password ( contraseña del anfitrion )</label>
+  <input id="password" name="password"></input>
+  <label for="email">Email</label>
+  <input id="email" name="email"></input>
+  <label for="music">Musica</label>
+  <input id="music" name="music"></input>
+  <label for="price">Precio</label>
+  <input id="price" name="price"></input>
+  <label for="names">Nombre del bebe</label>
+  <input id="names" name="names"></input>
+  <label for="names_font">Fuente del nombre</label>
+  <select id="names_font" name="names_font">
     <option value="Tangerine, cursive">Tangerine</option>
     <option value="Allura, cursive">Allura</option>
     <option value="Dancing Script, cursive">Dancing Script</option>
@@ -44,82 +203,177 @@
     <option value="Grey Qo, cursive">Grey Qo</option>
     <option value="Indie Flower, cursive">Indie Flower</option>
   </select>
-  <label for="invitation_url">Invitation_url</label>
-  <input id="invitation_url" name="invitation_url"></input>
-  <label for="event_address">Event address</label>
+  <label for="event_address">Ubicacion del Evento</label>
   <input id="event_address" name="event_address"></input>
-  <label for="party_address">Party Address</label>
-  <input id="party_address" name="party_address"></input>
-  <label for="party_text">Party text</label>
-  <input id="party_text" name="party_text"></input>
-  <label for="event_text">Event Text</label>
-  <input id="event_text" name="event_text"></input>
-  <label for="account_text">Account Text</label>
+  <label for="account_text">Cuenta</label>
   <input id="account_text" name="account_text"></input>
-  <label for="dress_code">Dress Code</label>
-  <input id="dress_code" name="dress_code"></input>
-  <label for="bar">Bar details</label>
-  <input id="bar" name="bar"></input>
-  <label for="party">Party</label>
-  <input id="party" name="party"></input>
-  <label for="kids">Kids</label>
-  <input id="kids" name="kids"></input>
-  <label for="date">Date</label>
+  <label for="date">Fecha ( formato : 2024-09-31T15:30:00 )</label>
   <input id="date" name="date"></input>
-  <label for="model">Model</label>
-  <select id="model" name="model">
-   <option value="goldenPlus">goldenPlus</option>
-   <option value="goldenLight">goldenLight</option>
-   <option value="gardenPlus">gardenPlus</option>
-   <option value="gardenLight">gardenLight</option>
-   <option value="modern">modern</option>
-   <option value="babyShower">babyshower</option>
-   <option value="rose">Rose</option>
+  <input type="hidden" name="model" value="babyShower">
+  <label for="gender">Genero del bebe</label>
+  <select id="gender" name="gender">
+    <option value="male">niño</option>
+    <option value="female">niña</option>
   </select>
-  <label for="gender">Gender -In case of babyshower-</label>
-  <input id="gender" name="gender"></input>
-  <label for="text1">Text1 -In case of babyshower-</label>
+  <label for="text1">Texto1</label>
   <input id="text1" name="text1"></input>
-  <label for="text2">Text2 -In case of babyshower-</label>
+  <label for="text2">Texto2</label>
   <input id="text2" name="text2"></input>
-  <label for="text3">Text3 -In case of babyshower-</label>
+  <label for="text3">Texto3</label>
   <input id="text3" name="text3"></input>
-  <label for="text4">Text4 -In case of babyshower-</label>
+  <label for="text4">Texto4</label>
   <input id="text4" name="text4"></input>
-  <label for="text5">Text5 -In case of babyshower-</label>
+  <label for="text5">Texto5</label>
   <input id="text5" name="text5"></input>
-  <label for="text6">Text6 -In case of babyshower-</label>
-  <input id="text6" name="text6"></input>
   <label for="imagen1">imagen1</label>
   <input id="imagen1" name="imagen1"></input>
-  <label for="imagen2">imagen2</label>
+  <button type="button" onclick="recomendedFemale()">Imagen 1 recomendada niña</button>
+  <button type="button" onclick="recomendedMale()">Imagen 1 recomendada niño</button>
+  <label for="imagen2">imagen2 ( ecografia 1)</label>
   <input id="imagen2" name="imagen2"></input>
-  <label for="imagen3">imagen3</label>
+  <label for="imagen3">imagen3 ( ecografia 2)</label>
   <input id="imagen3" name="imagen3"></input>
-  <label for="imagen4">imagen4</label>
+  <label for="imagen4">imagen4 ( ecografia 3)</label>
   <input id="imagen4" name="imagen4"></input>
-  <label for="imagen5">imagen5</label>
-  <input id="imagen5" name="imagen5"></input>
-  <label for="imagen6">imagen6 - BabyShower</label>
-  <input id="imagen6" name="imagen6"></input>
-  <label for="imagen7">imagen7</label>
-  <input id="imagen7" name="imagen7"></input>
-  <label for="imagen8">imagen8 - light</label>
-  <input id="imagen8" name="imagen8"></input>
-  <label for="imagen9">imagen9</label>
-  <input id="imagen9" name="imagen9"></input>
-  <label for="imagen10">imagen10</label>
-  <input id="imagen10" name="imagen10"></input>
-  <label for="imagen11">imagen11</label>
-  <input id="imagen11" name="imagen11"></input>
-  <label for="imagen12">imagen12 - plus</label>
-  <input id="imagen12" name="imagen12"></input>
-  <label for="imagen13">imagen13</label>
-  <input id="imagen13" name="imagen13"></input>
-  <label for="imagen14">imagen14</label>
-  <input id="imagen14" name="imagen14"></input>
-  <label for="imagen15">imagen15</label>
-  <input id="imagen15" name="imagen15"></input>
   <button>Create</button>
  </form>
 </div>
+<script>
+  function nav_appear(){
+    const nav = document.getElementsByClassName("links_two")[0]
+    if( nav.style.display === "none" ){
+      nav.style.display = "flex"
+    }
+    else{
+      nav.style.display = "none"
+    }
+  }
+
+  function recomendedGolden(){
+    alert("https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2Fgoldenwpp.png?alt=media&token=e7e0ff1d-4ee2-43c4-a8b1-21e3964484f6")
+  }
+  function recomendedFemale(){
+    prompt("Enlace recomendado","https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2Fbear.png?alt=media&token=f93aebe3-333e-43fe-8928-180a6ada65bc")
+  }
+  function recomendedMale(){
+    prompt("Enlace recomendado","https://firebasestorage.googleapis.com/v0/b/planticommerce.appspot.com/o/invitations%2FTarjeta_de_invitaci%C3%B3n_Baby_Shower_Ni%C3%B1a_Palo_de_Rosa___1_-removebg-preview.png?alt=media&token=ce0b8664-7774-4bc3-ac89-89317bf63f94")
+  }
+</script>
+<style>
+   .nav_two{
+    display: none;
+  }
+  .barras{
+    display: none;
+  }
+  @media screen and ( max-width : 750px ){
+    .nav_one{
+      display: none !important;
+    }
+    .barras{
+      display: inline;
+      width: 30px;
+      margin-top: 20px;
+      height: 30px;
+      filter: brightness(200);
+      margin-right: 20px;
+}
+    .nav_two{
+      display: flex;
+      background-color: rgb(127, 167, 133);
+      height: 70px;
+      width: 100%;
+      position: relative;
+      justify-content: space-between;
+    }
+
+    .admin_two{
+        margin: 0;
+        font-size: 25px;
+        padding-top: 20px;
+        color: #f4f4f4;
+        padding-left: 30px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .links_two{
+     width: 150px;
+     display: none;
+     background-color: #f4f4f4;
+     flex-direction: column;
+     gap: 15px;
+     justify-content: center;
+     align-items: center;
+     height: 250px;
+     margin-left: 15%;
+     } 
+     .links_two a{
+      text-decoration: none;
+      font-size: 20px;
+      background-color: #f4f4f4;
+      padding: 10px;
+      color: rgb(40, 96, 48);
+      border-radius: 20px;
+ 
+     }
+     .links_two a:hover{
+      background-color: rgb(127, 167, 133);
+      color: #ffffff;
+     }
+  }
+  body{
+    margin:0;
+  }
+  nav{
+        background-color: rgb(127, 167, 133);
+        height: 70px;
+        width: 100%;
+        display: flex;
+        
+    }
+
+form{
+  background-color: #f4f4f4;
+  width: 300px;
+  padding: 10px;
+}
+
+h1{
+  background-color: rgb(127, 167, 133);
+  color: #f4f4f4;
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  transform: translateY(25px);
+}
+
+.links{
+width: 150px;
+display: flex;
+gap: 15px;
+justify-content: center;
+align-items: center;
+height: 100%;
+margin-left: 15%;
+}
+.links a{
+ text-decoration: none;
+ font-size: 20px;
+ background-color: #f4f4f4;
+ padding: 10px;
+ color: rgb(40, 96, 48);
+ border-radius: 20px;
+ 
+}
+
+    .admin{
+        margin: 0;
+        font-size: 25px;
+        padding-top: 20px;
+        color: #f4f4f4;
+        padding-left: 30px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+</style>

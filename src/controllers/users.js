@@ -3,9 +3,8 @@ const bcrypt = require("bcrypt")
 const { generaJWT , generaAdminJWT } = require("../jwt/generaJwt") 
 const { jwtVerify } = require("../jwt/jwtVerify")
 const { isValidObjectId, default: mongoose } = require("mongoose")
-const user_admin = process.env.user_admin 
-const password_admin = process.env.password_admin 
-
+const user_admin = process.env.user_admin || "123456"
+const password_admin = process.env.password_admin || "78910"
 
 
 
@@ -25,48 +24,36 @@ const createUser = async ( req , res )=>{
     
 
   
-    if( model === "goldenLight" || model === "gardenLight" || "pink"){
+    if( model === "pumpink" || model === "white" || model === "rose"){
 
       const event_address = req.body.event_address
       const party_address = req.body.party_address
       const event_text = req.body.event_text
       const party_text = req.body.party_text
-      const invitation_url = req.body.invitation_url
       const account_text = req.body.account_text
       const dress_code = req.body.dress_code
       const bar = req.body.bar
-      const party = req.body.party
       const kids = req.body.kids
       const date = req.body.date
       const imagen1 = req.body.imagen1
       const imagen2 = req.body.imagen2
       const imagen3 = req.body.imagen3
       const imagen4 = req.body.imagen4
-      const imagen5 = req.body.imagen5
-      const imagen6 = req.body.imagen6
-      const imagen7 = req.body.imagen7
-      const imagen8 = req.body.imagen8
-      const event_theme = req.body.event_theme
       const music = req.body.music
       const names_font = req.body.names_font
-      const event_theme_font = req.body.event_theme_font
       const message = req.body.message
 
       const images = {
         imagen1,
         imagen2,
         imagen3,
-        imagen4,
-        imagen5,
-        imagen6,
-        imagen7,
-        imagen8,
+        imagen4
       }
 
 
       if ( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , message , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
+        const create_User = await userServices.createUserPrime( user , email , password , message , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text ,  dress_code , bar , date , kids , names_font )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
@@ -78,17 +65,16 @@ const createUser = async ( req , res )=>{
          res.status(400).json( { error : "Try with a valid typeof value field"} )
      }
     }
-    else if( model === "gardenPlus" || model === "goldenPlus"){
-      const event_theme = req.body.event_theme
+    else if( model === "goldenPlus" || model === "gardenPlus" ){
+
       const event_address = req.body.event_address
       const party_address = req.body.party_address
       const event_text = req.body.event_text
       const party_text = req.body.party_text
-      const invitation_url = req.body.invitation_url
       const account_text = req.body.account_text
       const dress_code = req.body.dress_code
       const bar = req.body.bar
-      const party = req.body.party
+      const kids = req.body.kids
       const date = req.body.date
       const imagen1 = req.body.imagen1
       const imagen2 = req.body.imagen2
@@ -97,16 +83,8 @@ const createUser = async ( req , res )=>{
       const imagen5 = req.body.imagen5
       const imagen6 = req.body.imagen6
       const imagen7 = req.body.imagen7
-      const imagen8 = req.body.imagen8
-      const imagen9 = req.body.imagen9
-      const imagen10 = req.body.imagen10
-      const imagen11 = req.body.imagen11
-      const imagen12 = req.body.imagen12
-      const kids = req.body.kids
       const music = req.body.music
-      const names_font = req.body.names_font
-      const event_theme_font = req.body.event_theme_font
-
+      const names = req.body.names
 
       const images = {
         imagen1,
@@ -115,27 +93,23 @@ const createUser = async ( req , res )=>{
         imagen4,
         imagen5,
         imagen6,
-        imagen7,
-        imagen8,
-        imagen9,
-        imagen10,
-        imagen11,
-        imagen12,
+        imagen7
       }
+
 
       if ( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
+        const create_User = await userServices.createUserGG( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
         else{
            res.status(400).json( { error : "Cannot create user" } )
         }
-      }
-      else{
+     }
+     else{
          res.status(400).json( { error : "Try with a valid typeof value field"} )
-      }
+     }
     }
     else if( model === "modern" ){
       const event_theme = req.body.event_theme
@@ -143,33 +117,24 @@ const createUser = async ( req , res )=>{
       const party_address = req.body.party_address
       const event_text = req.body.event_text
       const party_text = req.body.party_text
-      const invitation_url = req.body.invitation_url
       const account_text = req.body.account_text
       const dress_code = req.body.dress_code
       const bar = req.body.bar
-      const party = req.body.party
       const kids = req.body.kids
       const date = req.body.date
       const imagen1 = req.body.imagen1
       const imagen2 = req.body.imagen2
-      const imagen3 = req.body.imagen3
-      const imagen4 = req.body.imagen4
-      const imagen5 = req.body.imagen5
       const music = req.body.music
-      const names_font = req.body.names_font
-      const event_theme_font = req.body.event_theme_font
+      
 
       const images = {
         imagen1,
-        imagen2,
-        imagen3,
-        imagen4,
-        imagen5,
+        imagen2
       }
 
       if( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserPrime( user , email , password , music , model , price , names , invitation_url , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , party , date , kids , event_theme , names_font , event_theme_font )
+        const create_User = await userServices.createModern( user , email , password , music , model , price , names , images , event_address , party_address , party_text , event_text , account_text , dress_code , bar , date , kids , event_theme )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
@@ -186,29 +151,23 @@ const createUser = async ( req , res )=>{
       const event_address = req.body.event_address
       const account_text = req.body.account_text
       const gender = req.body.gender
-      const invitation_url = req.body.invitation_url
       const imagen1 = req.body.imagen1
       const imagen2 = req.body.imagen2
       const imagen3 = req.body.imagen3
       const imagen4 = req.body.imagen4
-      const imagen5 = req.body.imagen5
-      const imagen6 = req.body.imagen6
       const date = req.body.date
       const text1 = req.body.text1
       const text2 = req.body.text2
       const text3 = req.body.text3
       const text4 = req.body.text4
       const text5 = req.body.text5
-      const text6 = req.body.text6
       const music = req.body.music
-
+ 
       const images = {
         imagen1,
         imagen2,
         imagen3,
-        imagen4,
-        imagen5,
-        imagen6
+        imagen4
       }
       const all_text = {
         text1,
@@ -216,12 +175,11 @@ const createUser = async ( req , res )=>{
         text3,
         text4,
         text5,
-        text6
       }
 
       if ( user && typeof user === "string" && password && typeof password === "string" &&  email && typeof email === "string"  ){
 
-        const create_User = await userServices.createUserSecundary( user , email , password , music , model , price , names , invitation_url , images , event_address , account_text , date , all_text , gender )
+        const create_User = await userServices.createUserSecundary( user , email , password , music , model , price , names , images , event_address , account_text , date , all_text , gender )
         if( create_User.user && create_User.email && create_User.password && create_User._id ){
            res.status(200).json( { message : "User created successfully" } )
         }
@@ -244,6 +202,53 @@ const createUser = async ( req , res )=>{
 const createUserUI = async ( req , res )=>{
     res.status(200).render("createuser")
 }
+
+
+const deleteUser = async ( req , res )=>{
+ const id = req.params.uid
+ 
+ if( !mongoose.isValidObjectId( id ) ){
+  res.status( 400 ).json( { error : "NOT VALID OBJECT ID" } )
+ }
+ else{
+  const user = await userServices.findUser( id )
+  if( !user ){
+    res.status( 400 ).json( { error : "USER NOT FOUND" } )
+  }
+  else{
+    const deleteUser = await userServices.deleteUser( id )
+    if( !deleteUser ){
+      res.status( 400 ).json( { error : "CANNOT DELETE USER" } )
+    }
+    else{
+      res.status( 200 ).json( { message : "USER DELETED" } )
+    }
+  }
+ }
+ 
+}
+
+
+const getAll_Users = async ( req , res )=>{
+  const get_the_users = await userServices.getUsers()
+  if( !get_the_users ){
+    res.status( 400 ).json( { error : "CANNOT GET USERS" } )
+  }
+  else{
+    const users =  JSON.parse(JSON.stringify(get_the_users))
+    if( !users ){
+      res.status( 400 ).json( { error : "CANNOT PARSE JSON USERS" } )
+    }
+    else{
+      res.status( 200 ).render("users",{
+        users : users
+      }
+     )
+    }
+  }
+  
+ 
+} 
 
 
 
@@ -459,4 +464,11 @@ const deleteGuest = async ( req , res )=>{
   }
 }
 
-module.exports = { deleteGuest , admin_login_UI , delete_Table , admin_login , createUser , addGuest_tables , addTable , createUserUI , login_user , get_guests_data }
+
+const viewGuide = async ( req , res )=>{
+
+      res.status( 200 ).render("guide")
+}
+
+
+module.exports = { deleteGuest , viewGuide , deleteUser , getAll_Users , admin_login_UI , delete_Table , admin_login , createUser , addGuest_tables , addTable , createUserUI , login_user , get_guests_data }
